@@ -22,10 +22,16 @@ cipher_suite = AESGCM(secret_key)
 # Function for encrypting sensitive data using AES-GCM
 def encrypt_data(data):
     if isinstance(data, str):
-        # For simplicity, using an empty string as associated_data
-        associated_data = b""
-        ciphertext = cipher_suite.encrypt(associated_data, data.encode('utf-8'))
-        return ciphertext.hex()
+        # Generate a random nonce
+        nonce = os.urandom(12)  # 96-bit nonce
+
+        # Encrypt the data using the generated nonce
+        ciphertext = cipher_suite.encrypt(nonce, data.encode('utf-8'))
+
+        # Combine the nonce and ciphertext for storage or transmission
+        encrypted_data = nonce + ciphertext
+
+        return encrypted_data.hex()
     else:
         return data
 
