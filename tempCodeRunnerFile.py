@@ -1,2 +1,2 @@
-SECRET_KEY = Fernet.generate_key()
-cipher_suite = Fernet(SECRET_KEY)
+# Raj Patel    
+# Pacific id:- 989445044
